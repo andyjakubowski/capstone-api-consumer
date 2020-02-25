@@ -17,7 +17,7 @@
 :root {
 
   --color-text-primary: var(--remote-color-text-primary, #0A070D);
-  --color-text-secondary: var(--remote-color-text-primary, #5A4F65);
+  --color-text-secondary: var(--remote-color-text-secondary, #5A4F65);
   --color-text-tertiary: var(--remote-color-text-tertiary, #B8B4BD);
   --color-text-inverse-primary: var(--remote-color-text-inverse-primary, #EAE7EE);
   --color-background-canvas: var(--remote-color-background-canvas, #F7F6F8);
