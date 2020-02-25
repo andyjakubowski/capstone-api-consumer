@@ -18,10 +18,20 @@ require("channels")
 
 const root = document.documentElement;
 
-const refreshStyles = function refreshStyles() {
-  fetch('https://andy-capstone-week-03.herokuapp.com/lists/6/tokens.json')
+const applyTheme = function applyTheme(listId) {
+  fetch(`https://andy-capstone-week-03.herokuapp.com/lists/${listId}/tokens.json`)
     .then((response) => response.json())
     .then((jsObject) => updateCSSProperties(jsObject));
+};
+
+const applyLightTheme = function applyLightTheme() {
+  localStorage.setItem('activeTheme', 'light');
+  applyTheme(6);
+};
+
+const applyDarkTheme = function applyDarkTheme() {
+  localStorage.setItem('activeTheme', 'dark');
+  applyTheme(7);
 };
 
 const updateCSSProperties = function updateCSSProperties(tokens) {
@@ -36,10 +46,18 @@ const app = (function buildApp() {
       console.log(`document.readyState: ${document.readyState}`);
       console.log('app init');
 
-      const refreshStylesButton = document.getElementById('refresh-styles-button');
-      refreshStylesButton.addEventListener('click', refreshStyles);
+      const activeTheme = localStorage.getItem('activeTheme');
+      const lightThemeButton = document.getElementById('light-theme-button');
+      const darkThemeButton = document.getElementById('dark-theme-button');
 
-      refreshStyles();
+      lightThemeButton.addEventListener('click', applyLightTheme);
+      darkThemeButton.addEventListener('click', applyDarkTheme);
+
+      if (activeTheme === 'light') {
+        applyLightTheme();
+      } else {
+        applyDarkTheme();
+      }
     }
   };
 }());
