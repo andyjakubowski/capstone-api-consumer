@@ -15,3 +15,37 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+const root = document.documentElement;
+
+const refreshStyles = function refreshStyles() {
+  fetch('https://andy-capstone-week-03.herokuapp.com/lists/6/tokens.json')
+    .then((response) => response.json())
+    .then((jsObject) => updateCSSProperties(jsObject));
+};
+
+const updateCSSProperties = function updateCSSProperties(tokens) {
+  tokens.forEach(({ name, value }) => {
+    root.style.setProperty(`--remote-${name}`, value);
+  });
+}
+
+const app = (function buildApp() {
+  return {
+    init() {
+      console.log(`document.readyState: ${document.readyState}`);
+      console.log('app init');
+
+      const refreshStylesButton = document.getElementById('refresh-styles-button');
+      refreshStylesButton.addEventListener('click', refreshStyles);
+
+      refreshStyles();
+    }
+  };
+}());
+
+if (document.readyState !== 'loading') {
+  app.init();
+} else {
+  document.addEventListener('DOMContentLoaded', app.init)
+}
