@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>🦸🏽‍♀️🦸🏿‍♂️ Superhero Cards</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header class="page-header">
+      <h1>🦸🏽‍♀️🦸🏿‍♂️ Superhero Cards</h1>
+    </header>
+    <main>
+      <header>
+        <h2 class="text-secondary"><%= Faker::Movies::StarWars.quote %></h2>
+        <p class="text-tertiary"><%= Faker::Movies::StarWars.wookiee_sentence %></p>
+        <button class="button-primary">Become a Superhero</button>
+        <button class="button-secondary">Ask a question</button>
+      </header>
+      <section>
+        <%= yield %>
+      </section>
+    </main>
+    <footer>
+      <p><%= Faker::Books::Dune.quote %></p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+// Place all the styles related to the people controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.superhero-cards-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: var(--grid-gap-regular);
+  padding: var(--padding-regular);
+}
+
+.superhero-card {
+  background-color: var(--card-background);
+  border-radius: var(--card-border-radius);
+  padding: var(--padding-medium);
+}
