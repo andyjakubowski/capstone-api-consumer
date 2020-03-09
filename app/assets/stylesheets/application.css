@@ -16,15 +16,15 @@
 
 :root {
 
-  --color-text-primary: var(--remote-color-text-primary, #0A070D);
-  --color-text-secondary: var(--remote-color-text-secondary, #5A4F65);
-  --color-text-tertiary: var(--remote-color-text-tertiary, #B8B4BD);
-  --color-text-inverse-primary: var(--remote-color-text-inverse-primary, #EAE7EE);
-  --color-background-canvas: var(--remote-color-background-canvas, #F7F6F8);
-  --color-background-surface: var(--remote-color-background-surface, white);
-  --color-background-inverse: var(--remote-color-background-inverse, #0F0817);
-  --color-interactive-primary: var(--remote-color-interactive-primary, #FF820F);
-  --color-interactive-inverse: var(--remote-color-interactive-inverse, white);
+  --color-text-primary: var(--remote-color-text-primary, black);
+  --color-text-secondary: var(--remote-color-text-secondary, gray);
+  --color-text-tertiary: var(--remote-color-text-tertiary, gray);
+  --color-text-inverse-primary: var(--remote-color-text-inverse-primary, white);
+  --color-background-canvas: var(--remote-color-background-canvas, lightgray);
+  --color-background-surface: var(--remote-color-background-surface, lightgreen);
+  --color-background-inverse: var(--remote-color-background-inverse, black);
+  --color-interactive-primary: var(--remote-color-interactive-primary, red);
+  --color-interactive-inverse: var(--remote-color-interactive-inverse, lime);
 
   --font-size-extra-large: calc(var(--remote-font-size-extra-large, 48) * 1px);
   --font-size-large: calc(var(--remote-font-size-large, 32) * 1px);
