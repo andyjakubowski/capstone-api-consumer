@@ -17,7 +17,7 @@ consumer.subscriptions.create("ListChannel", {
     const tokens = data.list;
     
     tokens.forEach(({ name, value }) => {
-      root.style.setProperty(`--${name}`, value);
+      root.style.setProperty(`--remote-${name}`, value);
     });
   }
 });
