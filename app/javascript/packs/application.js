@@ -8,6 +8,63 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
+const App = (function App() {
+  const root = document.documentElement;
+  let ul;
+
+  const getLists = function getLists() {
+    return fetch('http://localhost:3027/spaces/snail-giraffe-alligator.json')
+      .then((response) => response.json());
+  };
+
+  const getTokens = function getTokens(listId) {
+    return fetch(`http://localhost:3027/lists/${listId}/tokens.json`)
+      .then((response) => response.json());
+  }
+
+  const listItemClicked = function listItemClicked(e) {
+    getTokens(e.target.dataset.id)
+      .then((tokens) => {
+        defineRootStyles(tokens);
+      });
+  };
+
+  const defineRootStyles = function defineRootStyles(tokens) {
+    // console.log(`received tokens: ${tokens}`);
+    tokens.forEach(({ name, value }) => {
+      root.style.setProperty(`--remote-${name}`, value);
+    });
+  };
+
+  const updateListsElement = function updateListsElement(lists) {
+    ul.innerHTML = '';
+    lists.forEach((list) => {
+      const li = document.createElement('li');
+      li.innerText = list.name;
+      li.classList.add('token-list-switcher__list-item');
+      li.setAttribute('data-id', list.id);
+      li.addEventListener('click', (e) => listItemClicked(e));
+      ul.append(li);
+    });
+  };
+
+  return {
+    init () {
+      ul = document.querySelector('.token-list-switcher__lists');
+
+      getLists()
+        .then((lists) => updateListsElement(lists));
+    },
+  };
+}());
+
+if (document.readyState !== 'loading') {
+  App.init();
+} else {
+  document.addEventListener('DOMContentLoaded', App.init)
+}
+
+
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
@@ -62,8 +119,3 @@ require("channels")
 //   };
 // }());
 
-// if (document.readyState !== 'loading') {
-//   app.init();
-// } else {
-//   document.addEventListener('DOMContentLoaded', app.init)
-// }

@@ -1,0 +1,23 @@
+.token-list-switcher {
+  
+  background-color: black;
+  color: gray;
+
+  &__lists {
+    display: flex;
+    height: 56px;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: scroll;
+  }
+
+  &__list-item {
+    flex-shrink: 0;
+    padding: 16px;
+    cursor: pointer;
+
+    &:hover {
+      color: seashell;
+    }
+  }
+}

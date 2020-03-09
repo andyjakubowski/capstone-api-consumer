@@ -4,14 +4,16 @@
     <title>🦸🏽‍♀️🦸🏿‍♂️ Superhero Cards</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="action-cable-url" content="ws://localhost:3027/cable">
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag "http://localhost:3027/lists/1/css" %>
+    <%= stylesheet_link_tag "http://localhost:3027/lists/35/css" %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <%= render 'layouts/token_list_switcher' %>
     <header class="page-header">
       <h1>🦸🏽‍♀️🦸🏿‍♂️ Superhero Cards</h1>
     </header>
@@ -19,8 +21,8 @@
       <header>
         <h2 class="text-secondary"><%= Faker::Movies::StarWars.quote %></h2>
         <p class="text-tertiary"><%= Faker::Movies::StarWars.wookiee_sentence %></p>
-        <button class="button-primary" id="light-theme-button">Use Light Theme</button>
-        <button class="button-secondary" id="dark-theme-button">Use Dark Theme</button>
+        <button class="button-primary" id="light-theme-button">Add a Card</button>
+        <button class="button-secondary" id="dark-theme-button">Ask a Question</button>
       </header>
       <section>
         <%= yield %>
