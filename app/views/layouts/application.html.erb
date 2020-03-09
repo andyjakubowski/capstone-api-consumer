@@ -4,9 +4,10 @@
     <title>🦸🏽‍♀️🦸🏿‍♂️ Superhero Cards</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="action-cable-url" content="ws://localhost:3027/cable">
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag "https://andy-capstone-week-05.herokuapp.com/lists/1/css" %>
+    <%= stylesheet_link_tag "http://localhost:3027/lists/1/css" %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
