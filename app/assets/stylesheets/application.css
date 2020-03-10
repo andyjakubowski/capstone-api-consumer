@@ -79,7 +79,6 @@ header.page-header {
   align-items: center;
   justify-content: center;
   display: flex;
-  height: var(--size-extra-large);
   text-align: center;
   padding-top: var(--padding-regular);
 }

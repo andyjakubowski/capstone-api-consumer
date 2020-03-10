@@ -5,10 +5,11 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="action-cable-url" content="ws://localhost:3027/cable">
+    <!-- <meta name="action-cable-url" content="ws://localhost:3027/cable"> -->
+    <%= action_cable_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag "http://localhost:3027/lists/35/css" %>
+    <%= stylesheet_link_tag "http://localhost:3027/lists/2/css" %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
