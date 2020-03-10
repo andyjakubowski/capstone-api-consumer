@@ -11,7 +11,12 @@ require("channels")
 const App = (function App() {
   const SPACE_NAME = 'cod-wolf-crab';
   const root = document.documentElement;
+  const storage = window.localStorage;
   let ul;
+
+  const activeListId = function activeListId() {
+    return Number(storage[`activeListId#${SPACE_NAME}`]) || null;
+  };
 
   const getLists = function getLists() {
     return fetch(`http://localhost:3027/spaces/${SPACE_NAME}.json`)
@@ -21,29 +26,51 @@ const App = (function App() {
   const getTokens = function getTokens(listId) {
     return fetch(`http://localhost:3027/lists/${listId}/tokens.json`)
       .then((response) => response.json());
-  }
-
-  const listItemClicked = function listItemClicked(e) {
-    getTokens(e.target.dataset.id)
-      .then((tokens) => {
-        defineRootStyles(tokens);
-      });
   };
 
-  const defineRootStyles = function defineRootStyles(tokens) {
-    // console.log(`received tokens: ${tokens}`);
-    tokens.forEach(({ name, value }) => {
+  const selectList = function selectList(li) {
+    const activeLi = document.querySelector('li[data-active]');
+    activeLi.classList.remove('token-list-switcher__list-item_active');
+    activeLi.removeAttribute('data-active');
+
+    li.classList.add('token-list-switcher__list-item_active');
+    li.setAttribute('data-active', '');
+    storage.setItem(`activeListId#${SPACE_NAME}`, li.dataset.id);
+  };
+
+  const listItemClicked = function listItemClicked(e) {
+    const li = e.target;
+    selectList(li);
+
+    getTokens(li.dataset.id)
+      .then((tokens) => updateStyles(tokens));
+  };
+
+  const updateStyles = function updateStyles(tokens) {
+
+    root.style = '';
+
+    tokens.forEach(({ name, value }, index) => {
       root.style.setProperty(`--remote-${name}`, value);
     });
   };
 
-  const updateListsElement = function updateListsElement(lists) {
+  const updateListSwitcher = function updateListSwitcher(lists) {
     ul.innerHTML = '';
+
     lists.forEach((list) => {
       const li = document.createElement('li');
+
       li.innerText = list.name;
       li.classList.add('token-list-switcher__list-item');
       li.setAttribute('data-id', list.id);
+      if (list.id === activeListId()) {
+        li.setAttribute('data-active', '');
+        li.classList.add('token-list-switcher__list-item_active');
+        getTokens(list.id)
+          .then((tokens) => updateStyles(tokens));
+      }
+
       li.addEventListener('click', (e) => listItemClicked(e));
       ul.append(li);
     });
@@ -54,7 +81,13 @@ const App = (function App() {
       ul = document.querySelector('.token-list-switcher__lists');
 
       getLists()
-        .then((lists) => updateListsElement(lists));
+        .then((lists) => {
+          if (!activeListId()) {
+            storage.setItem(`activeListId#${SPACE_NAME}`, lists[0].id)
+          }
+
+          updateListSwitcher(lists);
+        });
     },
   };
 }());
